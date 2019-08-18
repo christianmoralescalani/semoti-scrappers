@@ -2,6 +2,7 @@ import cheerio = require('cheerio');
 const puppeteer = require('puppeteer');
 const formatDate = require('date-format');
 import { noticia, noticiaSchema } from '../models/NoticiaModel';
+import conf from '../config' ;
 class ABIscraper {
     constructor() {
 
@@ -51,7 +52,7 @@ class ABIscraper {
                 cuerpo: cuerpos[aux] + cuerpos[aux + 1],
                 fuente: "ABI",
                 fecha: `${date}`,
-                foto: `${process.env.URI_BACKEND_PUBLIC}/defecto/defecto.jpg`,
+                foto: `${conf.backend}/defecto/defecto.jpg`,
                 etiquetado: false,
                 resumen: ''
             };

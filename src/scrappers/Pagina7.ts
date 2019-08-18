@@ -5,7 +5,7 @@ import { noticia, noticiaSchema } from '../models/NoticiaModel';
 
 import descargaImagen from '../lib/DescargaImagen';
 const formatDate = require('date-format');
-
+import conf from '../config' ;
 interface noticiaPreview {
     titulo: string,
     url: string
@@ -72,10 +72,10 @@ class ScraperPagina7 {
             let cuerpo2 = cuerpo.replace(/"/g,"'");
             let foto = $('figure>a').attr('href');
             if (foto === undefined) {
-                urlFoto = `${process.env.URI_BACKEND_PUBLIC}/defecto/defecto.jpg`;
+                urlFoto = `${conf.backend}/defecto/defecto.jpg`;
             } else {
-                const ImagenDescargada = await descargaImagen(`${this.URL_BASE}${foto}`, '../../');
-                urlFoto = `${process.env.URI_BACKEND_PUBLIC}/pagina7/${ImagenDescargada}`;
+                const ImagenDescargada = await descargaImagen(`${this.URL_BASE}${foto}`, `${conf.rutaImagenes}/pagina7/`);
+                urlFoto = `${conf.backend}/pagina7/${ImagenDescargada}`;
 
             }
             let tituloFormateado = noticiaActual.titulo.replace(/"/g,"'");

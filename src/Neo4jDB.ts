@@ -2,10 +2,10 @@ import {v1 as neo4j} from 'neo4j-driver';
 import dotenv from 'dotenv';
 import {Session, Driver} from 'neo4j-driver/types/v1';
 
-dotenv.config();
+//dotenv.config();
 
 class Neo4jDB{
-    URI:string =  'bolt://192.168.137.3';
+    URI:string =  'bolt://localhost';
     USUARIO:string =  'neo4j';
     CONTRASENA: string =  'mora';
     SESSION: Session;

@@ -3,7 +3,7 @@ import puppeteer = require('puppeteer');
 import { noticia, noticiaSchema } from '../models/NoticiaModel';
 import descargaImagen from '../lib/DescargaImagen';
 const formatDate = require('date-format');
-
+import conf from '../config' ;
 interface noticiaPreview {
     titulo: string,
     url: string
@@ -59,10 +59,10 @@ class ScrapperCorreoDelSur {
             let fotourl = $('article img.img-responsive').attr('src');
             let foto = '';
             if (fotourl === undefined) {
-                foto = `${process.env.URI_BACKEND_PUBLIC}/defecto/defecto.jpg`;
+                foto = `${conf.backend}/defecto/defecto.jpg`;
             } else {
-                const ImagenDescargada = await descargaImagen(`${fotourl}`, '../../');
-                foto = `${process.env.URI_BACKEND_PUBLIC}/cooreodelsur/${ImagenDescargada}`;
+                const ImagenDescargada = await descargaImagen(`${fotourl}`, `${conf.rutaImagenes}/correodelsur/`);
+                foto = `${conf.backend}/correodelsur/${ImagenDescargada}`;
             }
            // console.log(fotourl);
             let tit = $('.nota h1').text();

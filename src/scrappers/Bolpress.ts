@@ -4,7 +4,7 @@ import puppeteer = require('puppeteer');
 import { noticia, noticiaSchema } from '../models/NoticiaModel';
 import descargaImagen from '../lib/DescargaImagen';
 const formatDate = require('date-format');
-
+import conf from '../config' ;
 interface noticiaPreview {
     titulo: string,
     url: string
@@ -55,10 +55,10 @@ class BolpressScraper {
             let foto = '';
             let fotourl = $('header>img').attr('src');
             if (fotourl === undefined) {
-                foto = `${process.env.URI_BACKEND_PUBLIC}/defecto/defecto.jpg`;
+                foto = `${conf.backend}/defecto/defecto.jpg`;
             } else {
-                const ImagenDescargada = await descargaImagen(`${fotourl}`, '../../');
-                foto = `${process.env.URI_BACKEND_PUBLIC}/bolpress/${ImagenDescargada}`;
+                const ImagenDescargada = await descargaImagen(`${fotourl}`, `${conf.rutaImagenes}/bolpress/`);
+                foto = `${conf.backend}/bolpress/${ImagenDescargada}`;
             }
             let tit = $('h1.entry-title').text();
             let tituloformateado = tit.replace(/"/g,"'");
